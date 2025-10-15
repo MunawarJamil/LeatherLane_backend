@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
+import "./config/db.js"; // Ensure DB connects on server start
 dotenv.config(); // Load env variables
 
 const app = express();
