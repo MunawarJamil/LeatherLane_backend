@@ -1,0 +1,79 @@
+version: "3.9"
+
+services:
+  # ======================
+  # PostgreSQL Database
+  # ======================
+  postgres:
+    image: postgres:15-alpine
+    container_name: leatherlane_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: leather-lane
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ======================
+  # Redis Cache
+  # ======================
+  redis:
+    image: redis:7-alpine
+    container_name: leatherlane_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ======================
+  # Node.js Backend
+  # ======================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: leatherlane_backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      HOST: 0.0.0.0
+      PGHOST: postgres        # internal DNS within Docker network
+      PGUSER: postgres
+      PGPASSWORD: root
+      PGDATABASE: leather-lane
+      PGPORT: 5432
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: super_secure_secret_key_here
+      JWT_EXPIRES_IN: 1d
+      BCRYPT_SALT: 10
+      RATE_LIMIT_WINDOW: 60
+      RATE_LIMIT_MAX: 50
+    ports:
+      - "7000:5000"           # external:internal
+    volumes:
+      - .:/usr/src/app
+    command: ["npm", "start"]
+
+# ======================
+# Volumes
+# ======================
+volumes:
+  pg_data:
