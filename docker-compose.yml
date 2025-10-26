@@ -72,8 +72,4 @@ services:
       - .:/usr/src/app
     command: ["npm", "start"]
 
-# ======================
-# Volumes
-# ======================
-volumes:
-  pg_data:
+ 
