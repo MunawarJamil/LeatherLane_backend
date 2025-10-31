@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "migrate": "node src/config/migrate.js"
+    "migrate": "node src/config/migrate.js",
+    "docker-dev": "node src/server.js"
   },
   "author": "Munawar Jamil",
   "description": "Backend for LeatherLane E-commerce website",

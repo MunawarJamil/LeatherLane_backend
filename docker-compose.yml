@@ -67,8 +67,8 @@ services:
       RATE_LIMIT_MAX: 50
     ports:
       - "7000:7000"           # external:internal
-    volumes:
-      - .:/usr/src/app
+    # volumes:
+    #   - .:/usr/src/app
     command: ["npm", "start"]
 
  

@@ -1,16 +1,17 @@
- 
+
 FROM node:22-alpine
- 
+
 WORKDIR /usr/src/app
- 
+
 COPY package*.json ./
- 
+
 RUN npm install --production
- 
+
 COPY . .
- 
-EXPOSE 7000
- 
+
+EXPOSE 9000
+
 ENV NODE_ENV=production
- 
-CMD ["node", "src/server.js"]
+
+# CMD [ "npm" , "run" , "docker-dev" ]
+CMD [ "node", "src/server.js" ]

@@ -1,28 +1,29 @@
+// config/db.js
 import { Pool } from "pg";
 import dotenv from "dotenv";
-dotenv.config(); // Load env variables
+
+dotenv.config(); // Load environment variables
+
 // Create PostgreSQL connection pool
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  port: process.env.PGPORT ? parseInt(process.env.PGPORT) : 5432,
   max: process.env.PG_MAX_CLIENTS ? parseInt(process.env.PG_MAX_CLIENTS) : 10,
 });
 
-// Connect and log status
-pool.connect()
-  .then(() => {
+// Test connection
+(async () => {
+  try {
+    const client = await pool.connect();
     console.log("✅ PostgreSQL Connected Successfully");
-  })
-  .catch((err) => {
+    client.release();
+  } catch (err) {
     console.error("❌ PostgreSQL Connection Error:", err.message);
-    process.exit(1); // Stop server if DB fails
-  });
+    // process.exit(1); // Exit if DB connection fails
+  }
+})();
 
 export default pool;
-
-
-
-
