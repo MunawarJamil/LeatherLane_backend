@@ -12,7 +12,7 @@ const start = async () => {
   try {
     // ✅ Test PostgreSQL connection
     await pool.query("SELECT 1");
-    console.log("✅ PostgreSQL Connected Successfully");
+    console.log(" PostgreSQL Connected Successfully");
 
     // ✅ Connect Redis only once
     await connectRedis();

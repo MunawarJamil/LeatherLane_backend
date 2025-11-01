@@ -1,6 +1,6 @@
-import { ApiError } from "../utils/ApiError.js";
+import ApiError from "../utills/ApiError.js";
 
-export const validate = (schema) => {
+export const validateSchema = (schema) => {
   return (req, res, next) => {
     try {
       const parsedData = schema.parse(req.body);
@@ -16,6 +16,5 @@ export const validate = (schema) => {
     }
   };
 };
-
 
 // usage example: router.post("/register", validate(adminRegisterSchema), AdminController.register);

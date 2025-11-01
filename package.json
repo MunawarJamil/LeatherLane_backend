@@ -7,7 +7,7 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "migrate": "node src/config/migrate.js",
-    "docker-dev": "node src/server.js"
+    "docker-dev": "nodemon --legacy-watch src/server.js"
   },
   "author": "Munawar Jamil",
   "description": "Backend for LeatherLane E-commerce website",
@@ -21,6 +21,7 @@
     "morgan": "^1.10.1",
     "pg": "^8.16.3",
     "pino": "^10.0.0",
+    "pino-pretty": "^13.1.2",
     "redis": "^5.8.3",
     "uuid": "^13.0.0",
     "zod": "^4.1.12"

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const adminRegisterSchema = z.object({
+export const userRegisterSchema = z.object({
   name: z
     .string()
     .min(3, "Name must be at least 3 characters long")
@@ -16,7 +16,7 @@ export const adminRegisterSchema = z.object({
     .max(100, "Password cannot exceed 100 characters"),
 });
 
-export const adminLoginSchema = z.object({
+export const userLoginSchema = z.object({
   email: z
     .string()
     .email("Invalid email format"),

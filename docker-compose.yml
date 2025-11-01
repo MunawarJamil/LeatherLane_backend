@@ -10,7 +10,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: leather-lane
       
     ports:
@@ -56,7 +56,7 @@ services:
       HOST: 0.0.0.0
       PGHOST: postgres        # internal DNS within Docker network
       PGUSER: postgres
-      PGPASSWORD: root
+      PGPASSWORD: postgres
       PGDATABASE: leather-lane
       PGPORT: 5432
       REDIS_URL: redis://redis:6379

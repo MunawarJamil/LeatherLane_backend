@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 22
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint (if any)
+        run: npm run lint || echo "no lint script or lint failed"
+
+      - name: Run tests
+        run: npm test
+        # optional: if you use coverage, upload artifacts here
+
+      - name: Build Docker image (local build, not pushed)
+        run: docker build --tag ${{ github.repository }}:${{ github.sha }} .

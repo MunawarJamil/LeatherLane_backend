@@ -3,7 +3,11 @@ import debugRoutes from "./debugRoutes.js";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.json({ status: "ok", message: "LeatherLane Backend API is Running.." });
+  res.json({
+    status: "ok",
+    message:
+      "LeatherLane Backend API is Running..",
+  });
 });
 
 router.get("/health", (req, res) => {

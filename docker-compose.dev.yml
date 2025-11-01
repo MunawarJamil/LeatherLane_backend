@@ -21,8 +21,8 @@ services:
       redis:
         condition: service_started
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     command: npm run docker-dev
 
   # ===========================
