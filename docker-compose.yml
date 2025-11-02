@@ -40,7 +40,7 @@ services:
   # Node.js Backend
   # ======================
   backend:
-    image: munawar999/leather-lane-backend:latest
+    image: munawar999/leather-lane-backend:latest1
     # build:
     #   context: .
       # dockerfile: Dockerfile 
