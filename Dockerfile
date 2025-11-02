@@ -10,7 +10,7 @@ RUN npm install
 #  later will add for production image
 COPY . .
 
-EXPOSE 9000
+EXPOSE 7000
 
 ENV NODE_ENV=production
 

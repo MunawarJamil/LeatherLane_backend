@@ -6,7 +6,7 @@ import redisClient, { connectRedis } from "./config/redis.js";
 dotenv.config();
 
 // Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7000;
 
 const start = async () => {
   try {
@@ -21,9 +21,16 @@ const start = async () => {
     app.locals.db = pool;
     app.locals.redis = redisClient;
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
+    // app.listen(PORT, () => {
+    //   console.log(`🚀 Server running on port ${PORT}`);
+    // });
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
+
+
+
   } catch (err) {
     console.error("❌ Error starting server:", err);
     process.exit(1);

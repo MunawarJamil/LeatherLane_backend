@@ -40,9 +40,11 @@ services:
   # Node.js Backend
   # ======================
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: munawar999/leather-lane-backend:latest
+    # build:
+    #   context: .
+      # dockerfile: Dockerfile 
+      
     container_name: leatherlane_backend
     restart: always
     depends_on:
@@ -66,7 +68,7 @@ services:
       RATE_LIMIT_WINDOW: 60
       RATE_LIMIT_MAX: 50
     ports:
-      - "7000:7000"           # external:internal
+      - "80:7000"           # external:internal
     # volumes:
     #   - .:/usr/src/app
     command: ["npm", "start"]
