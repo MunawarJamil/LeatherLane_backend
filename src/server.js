@@ -24,7 +24,7 @@ const start = async () => {
     // app.listen(PORT, () => {
     //   console.log(`🚀 Server running on port ${PORT}`);
     // });
-
+//new change to bind to all interfaces
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
