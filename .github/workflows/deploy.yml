@@ -36,6 +36,6 @@ jobs:
           script: |
             cd ~/apps/leatherlane-backend
             docker compose down
-            docker pull ${{ secrets.DOCKER_IMAGE }}:latest
+            docker pull ${{ secrets.DOCKER_IMAGE }}:latest1
             docker compose up -d
             docker image prune -f
