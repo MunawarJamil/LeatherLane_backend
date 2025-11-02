@@ -5,7 +5,7 @@ const router = Router();
 router.get("/", (req, res) => {
   res.json({
     status: "ok",
-    message: "Dockorized LeatherLane Backend API is Running..",
+    message: "Dockorized LeatherLane Backend API is Running successfully on aws ec2...",
   });
 });
 
